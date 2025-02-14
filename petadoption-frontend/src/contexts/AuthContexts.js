@@ -7,6 +7,7 @@ const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [ isAdmin, setIsAdmin] = useState(false);
 
     const login = async (credentials) => {
         const response = await axios.post(`${urlApi}/token/`,
@@ -17,6 +18,8 @@ const AuthProvider = ({children}) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data['access']}`
         setUser({
             token: response.data['access'],})
+        const userResponse = await axios.get(`${urlApi}/user/`);
+        setIsAdmin(userResponse.data.groups.includes('Administrador'));
     };
 
     useEffect(() => {
@@ -25,6 +28,10 @@ const AuthProvider = ({children}) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
             setUser({
                 token: token,})
+
+            axios.get(`${urlApi}/user/`).then((response) => {
+                setIsAdmin(response.data.groups.includes('Administrador'));
+            });
         }
         setLoading(false);
     }, []);
@@ -35,11 +42,12 @@ const AuthProvider = ({children}) => {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
         setUser(null);
+        setIsAdmin(false);
     };
 
     return (
         <>
-        <AuthContext.Provider value={{ user, login, logout, loading}}>
+        <AuthContext.Provider value={{ user, isAdmin, login, logout, loading}}>
             {children}
         </AuthContext.Provider>
         </>
