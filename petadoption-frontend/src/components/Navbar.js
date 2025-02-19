@@ -1,7 +1,8 @@
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContexts";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Toolbar } from "@mui/material";
+import logo from "../components/logopets.png";
 
 
 const Navbar = () => {
@@ -12,14 +13,16 @@ const Navbar = () => {
 
             <AppBar position="fixed" sx={{ backgtoundColor: "#3f51b5" }}>
                 <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography
+                    {/* <Typography
                         variant="h6"
                         component="div"
                         sx={{ fontWeight: "bold" }}
                     >
                         PetAdoption
-                    </Typography>
-
+                    </Typography> */}
+                    <Link to="/">
+                     <img src={logo} alt="Logo" style={{ height: "60px", marginRight: "10px"}}/>
+                    </Link>
                     <Box sx={{ display: "flex", gap: 2}}>
                         <Button
                             component={Link}
@@ -86,6 +89,22 @@ const Navbar = () => {
                                     </Button>
                                 </>
                             ) : (
+                                <>
+                                <Button
+                                        component={Link}
+                                        to="/register"
+                                        sx={{
+                                            color: "#fff",
+                                            backgroundColor: "#ffffff33",
+                                            textTransform: "none",
+                                            fontSize: "1rem",
+                                            "&:hover": {
+                                                backgroundColor: "##ffffff4d",    
+                                            }
+                                        }}
+                                    >
+                                        Registrarse
+                                    </Button>
 
                                 <Button
                                         component={Link}
@@ -102,7 +121,7 @@ const Navbar = () => {
                                     >
                                         Iniciar Sesión
                                     </Button>
-                                
+                                    </>
                             )
                         }
                     </Box>

@@ -10,11 +10,11 @@ const Galery = () => {
     const getPets = async () => {
         try {
             axios.get(`${urlApi}/pets/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            }
+            // {
+            //     headers: {
+            //         Authorization: `Bearer ${localStorage.getItem('token')}`
+            //     }
+            // }
             )
             .then((response) => {
                 setPets(response.data);

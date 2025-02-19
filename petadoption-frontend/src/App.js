@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile"
 import ContactUs from "./components/ContactUs";
 import PetList from "./components/PetList";
+import Register from "./components/Register";
 const App = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
             <Route path="/perfil" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
             {/* <Route path="/perfil-edit" element={<ProfileEdit />} /> */}
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/pets" element={<PetList />} />
